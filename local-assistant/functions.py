@@ -35,7 +35,7 @@ def get_temperature_and_humidity(
   host: str,
   port: Optional[int] = 8888,
   BCM_PIN: Optional[int] = 4
-) :
+) -> Dict[str, float]:
   pi = pigpio.pi(host=host, port=port)
   sensor = dht.DHT11(pi, BCM_PIN)
   for d in sensor:
