@@ -32,12 +32,12 @@ def get_current_time() -> str:
 
 
 def get_temperature_and_humidity(
-  host: str,
+  host: Optional[str] = "127.0.0.1",
   port: Optional[int] = 8888,
-  BCM_PIN: Optional[int] = 4
+  gpio_pin: Optional[int] = 4
 ) -> Dict[str, float]:
   pi = pigpio.pi(host=host, port=port)
-  sensor = dht.DHT11(pi, BCM_PIN)
+  sensor = dht.DHT11(pi, gpio_pin)
   for d in sensor:
     print("temperature: {}".format(d['temperature']))
     print("humidity: {}".format(d['humidity']))

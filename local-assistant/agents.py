@@ -197,7 +197,7 @@ def ask_agent(
     
     host_1 = "192.168.1.47"
     port_1 = 8888
-    BCM_PIN_1 = 4
+    gpio_pin_1 = 4
     
     # Message système avec instructions détaillées
     system_message = f"""
@@ -208,7 +208,7 @@ def ask_agent(
     - is_website_accessible
     - get_temperature_and_humidity
     
-    Dans la chambre le capteur DHT11 est connecté à la broche BCM {BCM_PIN_1} d'un Raspberry Pi avec un service remotegpio sur le port {port_1}, il est accessible sur le reseau local via l'adresse IP {host_1}."
+    Dans la chambre le capteur DHT11 est connecté à la broche {gpio_pin_1} d'un Raspberry Pi avec un service remotegpio sur le port {port_1}, il est accessible sur le reseau local via l'adresse IP {host_1}."
     """
 
     # Construire le message utilisateur en fonction des paramètres

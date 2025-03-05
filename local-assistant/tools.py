@@ -52,11 +52,11 @@ get_temperature_and_humidity_tool = {
     'description': 'Get the temperature and humidity',
     'parameters': {
       'type': 'object',
-      'required': ['host', 'port', 'BCM_PIN'],
+      'required': ['host', 'port', 'gpio_pin'],
       'properties': {
         'host': {'type': 'string', 'description': 'The IP address of the Raspberry Pi'},
         'port': {'type': 'integer', 'description': 'The port of the Raspberry Pi'},
-        'BCM_PIN': {'type': 'integer', 'description': 'The BCM pin of the DHT11 sensor'},
+        'gpio_pin': {'type': 'integer', 'description': 'The pin of the DHT11 sensor'},
       },
     },
   },
