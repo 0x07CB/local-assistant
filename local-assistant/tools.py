@@ -55,8 +55,8 @@ get_temperature_and_humidity_tool = {
       'required': ['host', 'port', 'gpio_pin'],
       'properties': {
         'host': {'type': 'string', 'description': 'The IP address of the Raspberry Pi'},
-        'port': {'type': 'integer', 'description': 'The port of the Raspberry Pi'},
-        'gpio_pin': {'type': 'integer', 'description': 'The pin of the DHT11 sensor'},
+        'port': {'type': 'string', 'description': 'The port of the Raspberry Pi'},
+        'gpio_pin': {'type': 'string', 'description': 'The pin of the DHT11 sensor'},
       },
     },
   },

@@ -33,8 +33,8 @@ def get_current_time() -> str:
 
 def get_temperature_and_humidity(
   host: Optional[str] = "127.0.0.1",
-  port: Optional[int] = 8888,
-  gpio_pin: Optional[int] = 4
+  port: Optional[Union[str, int]] = "8888",
+  gpio_pin: Optional[Union[str, int]] = "4"
 ) -> str:
   pi = pigpio.pi(host=host, port=port)
   sensor = dht.DHT11(pi, gpio_pin)
