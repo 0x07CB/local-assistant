@@ -8,22 +8,23 @@ import pigpio
 
 class DHT11(object):
     """
-    The DHT11 class is a stripped version of the DHT22 sensor code by joan2937.
-    You can find the initial implementation here:
+    La classe DHT11 est une version simplifiée du code du capteur DHT22 de joan2937.
+    Vous pouvez trouver l'implémentation initiale ici :
     - https://github.com/srounet/pigpio/tree/master/EXAMPLES/Python/DHT22_AM2302_SENSOR
 
-    example code:
+    Exemple d'utilisation :
     >>> pi = pigpio.pi()
-    >>> sensor = DHT11(pi, 4) # 4 is the data GPIO pin connected to your sensor
+    >>> sensor = DHT11(pi, 4)  # 4 est la broche GPIO de données connectée à votre capteur
     >>> for response in sensor:
-    ....    print("Temperature: {}".format(response['temperature']))
-    ....    print("Humidity: {}".format(response['humidity']))
+    ...     print("Température : {}".format(response['temperature']))
+    ...     print("Humidité : {}".format(response['humidity']))
     """
 
     def __init__(self, pi, gpio):
         """
-        pi (pigpio): an instance of pigpio
-        gpio (int): gpio pin number
+        Args:
+            pi (pigpio.pi): Une instance de la classe pigpio.pi pour contrôler les GPIO.
+            gpio (int): Le numéro de la broche GPIO à laquelle le capteur DHT11 est connecté.
         """
         self.pi = pi
         self.gpio = gpio
@@ -36,8 +37,8 @@ class DHT11(object):
 
     def setup(self):
         """
-        Clears the internal gpio pull-up/down resistor.
-        Kills any watchdogs.
+        Efface la résistance pull-up/down interne de la broche GPIO.
+        Désactive tout watchdog actif sur cette broche.
         """
         self.pi.set_pull_up_down(self.gpio, pigpio.PUD_OFF)
         self.pi.set_watchdog(self.gpio, 0)
@@ -45,7 +46,7 @@ class DHT11(object):
 
     def register_callbacks(self):
         """
-        Monitors RISING_EDGE changes using callback.
+        Surveille les changements sur les fronts montants et descendants (EITHER_EDGE) en utilisant une fonction de rappel (callback).
         """
         self.either_edge_cb = self.pi.callback(
             self.gpio,
@@ -55,8 +56,9 @@ class DHT11(object):
 
     def either_edge_callback(self, gpio, level, tick):
         """
-        Either Edge callbacks, called each time the gpio edge changes.
-        Accumulate the 40 data bits from the dht11 sensor.
+        Fonction de rappel pour les changements d'état (fronts montants ou descendants) sur la broche GPIO.
+        Elle est appelée à chaque changement d'état de la broche GPIO.
+        Accumule les 40 bits de données provenant du capteur DHT11.
         """
         level_handlers = {
             pigpio.FALLING_EDGE: self._edge_FALL,
@@ -69,7 +71,12 @@ class DHT11(object):
 
     def _edge_RISE(self, tick, diff):
         """
-        Handle Rise signal.
+        Gère le signal montant (front montant).
+
+        Cette méthode est appelée lorsqu'un front montant est détecté sur la broche GPIO.
+        Elle détermine si le front montant représente un bit de donnée (0 ou 1) en fonction de la durée de l'état haut précédent (diff).
+        Elle accumule les bits pour former les valeurs d'humidité, de température et de checksum.
+        Elle vérifie également l'intégrité des données reçues en comparant le checksum calculé avec le checksum reçu.
         """
         val = 0
         if diff >= 50:
@@ -87,7 +94,7 @@ class DHT11(object):
                 total = self.humidity + self.temperature
                 # is checksum ok ?
                 if not (total & 255) == self.checksum:
-                    raise
+                    raise Exception("Checksum error")
         elif 16 <= self.bit < 24: # in temperature byte
             self.temperature = (self.temperature << 1) + val
         elif 0 <= self.bit < 8: # in humidity byte
@@ -98,7 +105,12 @@ class DHT11(object):
 
     def _edge_FALL(self, tick, diff):
         """
-        Handle Fall signal.
+        Gère le signal de descente (front descendant).
+
+        Cette méthode est appelée lorsqu'un front descendant est détecté sur la broche GPIO.
+        Elle réinitialise les variables de bit, de checksum, de température et d'humidité
+        si la durée de l'état haut précédent est suffisamment longue, indiquant le début
+        d'une nouvelle transmission de données.
         """
         self.high_tick = tick
         if diff <= 250000:
@@ -110,13 +122,16 @@ class DHT11(object):
 
     def _edge_EITHER(self, tick, diff):
         """
-        Handle Either signal.
+        Gère les signaux indéterminés (front montant ou descendant).
+
+        Cette méthode est appelée lorsqu'un front montant ou descendant est détecté sur la broche GPIO.
+        Elle désactive le watchdog timer sur la broche GPIO.
         """
         self.pi.set_watchdog(self.gpio, 0)
 
     def read(self):
         """
-        Start reading over DHT11 sensor.
+        Démarre la lecture des données du capteur DHT11.
         """
         self.pi.write(self.gpio, pigpio.LOW)
         time.sleep(0.017) # 17 ms
@@ -126,7 +141,7 @@ class DHT11(object):
 
     def close(self):
         """
-        Stop reading sensor, remove callbacks.
+        Arrête la lecture du capteur et supprime les callbacks.
         """
         self.pi.set_watchdog(self.gpio, 0)
         if self.either_edge_cb:
@@ -135,13 +150,13 @@ class DHT11(object):
 
     def __iter__(self):
         """
-        Supporte le protocole itérateur.
+        Permet d'utiliser l'objet DHT11 comme un itérateur.
         """
         return self
 
     def __next__(self):
         """
-        Exécute la méthode read et retourne les informations de température et d'humidité.
+        Exécute une lecture du capteur DHT11 et retourne un dictionnaire contenant la température et l'humidité.
         """
         self.read()
         response = {
