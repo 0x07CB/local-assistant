@@ -37,7 +37,7 @@ def get_temperature_and_humidity(
   gpio_pin: Optional[Union[str, int]] = "4"
 ) -> str:
   pi = pigpio.pi(host=host, port=port)
-  sensor = dht.DHT11(pi, gpio_pin)
+  sensor = dht.DHT11(pi, gpio_pin if isinstance(gpio_pin, int) else int(gpio_pin))
   for d in sensor:
     try:
       temperature, humidity = d['temperature'], d['humidity']
