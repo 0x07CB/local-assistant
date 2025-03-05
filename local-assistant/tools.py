@@ -2,21 +2,25 @@
 
 # Tools can still be manually defined and passed into chat
 get_current_date_tool = {
-    "name": "get_current_date",
-    "description": "Get the current date",
-    "parameters": {
-        "type": "string",
-        "description": "The current date"
-    }
+  'type': 'function',
+  'function': {
+    'name': 'get_current_date',
+    'description': 'Get the current date',
+    'parameters': {
+      'type': 'object',
+      'required': [],
+      'properties': {
+      },
+    },
+  },
 }
 
 get_current_time_tool = {
-    "name": "get_current_time",
-    "description": "Get the current time",
-    "parameters": {
-        "type": "string",
-        "description": "The current time"
-    }
+  'type': 'function',
+  'function': {
+    'name': 'get_current_time',
+    'description': 'Get the current time',
+  },
 }
 
 is_website_accessible_tool = {
@@ -32,4 +36,19 @@ is_website_accessible_tool = {
         },
         "required": ["url"]
     }
+}
+
+
+get_temperature_and_humidity_tool = {
+  "name": "get_temperature_and_humidity",
+  "description": "Récupère la température et l'humidité",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "host": {"type": "string", "description": "L'adresse IP du Raspberry Pi"},
+      "port": {"type": "integer", "description": "Le port du Raspberry Pi"},
+      "BCM_PIN": {"type": "integer", "description": "Le numéro de la broche BCM du capteur DHT11"}
+    },
+    "required": ["host", "port", "BCM_PIN"]
+  }
 }
