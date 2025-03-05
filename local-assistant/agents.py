@@ -195,9 +195,20 @@ def ask_agent(
     
     client = ollama_client(ollama_base_url)
     
+    host_1 = "192.168.1.47"
+    port_1 = 8888
+    BCM_PIN_1 = 4
+    
     # Message système avec instructions détaillées
-    system_message = """
+    system_message = f"""
     Tu es un assistant qui peut répondre à des questions et exécuter des tâches.
+    Tu peux utiliser les outils suivants :
+    - get_current_date
+    - get_current_time
+    - is_website_accessible
+    - get_temperature_and_humidity
+    
+    Dans la chambre le capteur DHT11 est connecté à la broche BCM {BCM_PIN_1} d'un Raspberry Pi avec un service remotegpio sur le port {port_1}, il est accessible sur le reseau local via l'adresse IP {host_1}."
     """
 
     # Construire le message utilisateur en fonction des paramètres
