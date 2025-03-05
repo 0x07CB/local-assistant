@@ -3,11 +3,12 @@
 from functions import get_current_date
 from functions import get_current_time
 from functions import is_website_accessible
+from functions import get_temperature_and_humidity
 
 from tools import get_current_date_tool
 from tools import get_current_time_tool
 from tools import is_website_accessible_tool
-
+from tools import get_temperature_and_humidity_tool
 
 from typing import List
 from typing import Dict
@@ -209,14 +210,16 @@ def ask_agent(
     tools_list = [
         get_current_date_tool,
         get_current_time_tool,
-        is_website_accessible_tool
+        is_website_accessible_tool,
+        get_temperature_and_humidity_tool
     ]
     prompt_ = None
 
     available_functions = {
         'get_current_date': get_current_date,
         'get_current_time': get_current_time,
-        'is_website_accessible': is_website_accessible
+        'is_website_accessible': is_website_accessible,
+        'get_temperature_and_humidity': get_temperature_and_humidity
     }
 
     # Configuration des options pour Ollama
