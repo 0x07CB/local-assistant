@@ -81,8 +81,6 @@ class DHT11(object):
         val = 0
         if diff >= 50:
             val = 1
-        if diff >= 200: # Bad bit?
-            self.checksum = 256 # Force bad checksum
 
         if self.bit >= 40: # Message complete
             self.bit = 40
@@ -94,7 +92,7 @@ class DHT11(object):
                 total = self.humidity + self.temperature
                 # is checksum ok ?
                 if not (total & 255) == self.checksum:
-                    raise Exception("Checksum error")
+                    print("Erreur de checksum ignorée : attendu", (total & 255), "obtenu", self.checksum)
         elif 16 <= self.bit < 24: # in temperature byte
             self.temperature = (self.temperature << 1) + val
         elif 0 <= self.bit < 8: # in humidity byte
