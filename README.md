@@ -11,7 +11,9 @@
 - [Remerciements](#remerciements)
 
 ## Introduction
-Une brève introduction sur ce qu'est le projet, ses objectifs et ses fonctionnalités principales.
+Dans un monde où les assistants vocaux dominants comme Alexa, Google Assistant et Siri semblent souvent déconnectés des besoins quotidiens et des scénarios uniques que nous envisageons, il est temps de réimaginer ce qu'un assistant vocal peut être. Ce projet est né d'une vision : créer un assistant vocal qui soit véritablement local, un outil qui s'intègre harmonieusement avec nos autres projets, qu'il s'agisse de reconnaissance vocale, de synthèse vocale, ou de bien d'autres innovations.
+
+Plutôt que de chercher à surpasser les géants, l'objectif est de faire les choses correctement. Car, comme le dit le proverbe, "le mieux est l'ennemi du bien". Cet assistant est conçu pour être un allié fidèle, capable d'exécuter des appels de fonctions en utilisant les ressources locales de l'utilisateur, tout en respectant la simplicité et l'efficacité. C'est une invitation à redécouvrir la puissance de la technologie locale, façonnée par et pour ses utilisateurs.
 
 ## Installation
 Pour installer et utiliser ce projet de manière optimale, il est recommandé d'utiliser un environnement virtuel. Cela permet de gérer les dépendances de manière isolée et d'éviter les conflits avec d'autres projets.
