@@ -20,35 +20,44 @@ get_current_time_tool = {
   'function': {
     'name': 'get_current_time',
     'description': 'Get the current time',
+    'parameters': {
+      'type': 'object',
+      'required': [],
+      'properties': {
+      },
+    },
   },
 }
 
 is_website_accessible_tool = {
-    "name": "is_website_accessible",
-    "description": "Vérifie si un site web est accessible",
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "url": {
-                "type": "string",
-                "description": "L'URL du site web à vérifier"
-            }
-        },
-        "required": ["url"]
-    }
+  'type': 'function',
+  'function': {
+    'name': 'is_website_accessible',
+    'description': 'Check if a website is accessible',
+    'parameters': {
+      'type': 'object',
+      'required': ['url'],
+      'properties': {
+        'url': {'type': 'string', 'description': 'The URL of the website to check'}
+      },
+    },
+  },
 }
 
 
 get_temperature_and_humidity_tool = {
-  "name": "get_temperature_and_humidity",
-  "description": "Récupère la température et l'humidité",
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "host": {"type": "string", "description": "L'adresse IP du Raspberry Pi"},
-      "port": {"type": "integer", "description": "Le port du Raspberry Pi"},
-      "BCM_PIN": {"type": "integer", "description": "Le numéro de la broche BCM du capteur DHT11"}
+  'type': 'function',
+  'function': {
+    'name': 'get_temperature_and_humidity',
+    'description': 'Get the temperature and humidity',
+    'parameters': {
+      'type': 'object',
+      'required': ['host', 'port', 'gpio_pin'],
+      'properties': {
+        'host': {'type': 'string', 'description': 'The IP address of the Raspberry Pi'},
+        'port': {'type': 'string', 'description': 'The port of the Raspberry Pi'},
+        'gpio_pin': {'type': 'string', 'description': 'The pin of the DHT11 sensor'},
+      },
     },
-    "required": ["host", "port", "BCM_PIN"]
-  }
+  },
 }

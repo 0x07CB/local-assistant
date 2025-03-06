@@ -32,21 +32,22 @@ def get_current_time() -> str:
 
 
 def get_temperature_and_humidity(
-  host: str,
-  port: Optional[int] = 8888,
-  BCM_PIN: Optional[int] = 4
-) :
+  host: Optional[str] = "127.0.0.1",
+  port: Optional[Union[str, int]] = "8888",
+  gpio_pin: Optional[Union[str, int]] = "4"
+) -> str:
   pi = pigpio.pi(host=host, port=port)
-  sensor = dht.DHT11(pi, BCM_PIN)
+  sensor = dht.DHT11(pi, gpio_pin if isinstance(gpio_pin, int) else int(gpio_pin))
   for d in sensor:
-    print("temperature: {}".format(d['temperature']))
-    print("humidity: {}".format(d['humidity']))
-    time.sleep(1)
-  sensor.close()
-  return {
-    "temperature": d['temperature'],
-    "humidity": d['humidity']
-  }
+    try:
+      temperature, humidity = d['temperature'], d['humidity']
+      return f"Temperature: {temperature}°C, Humidité: {humidity}%"
+    except Exception as e:
+      print(f"Erreur lors de la lecture du capteur DHT11: {e}, nouvelle tentative")
+      time.sleep(1)
+      continue
+    finally:
+      sensor.close()
 
   
 # Fonction pour verifier l'accessibilite d'un site web

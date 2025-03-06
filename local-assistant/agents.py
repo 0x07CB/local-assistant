@@ -3,11 +3,12 @@
 from functions import get_current_date
 from functions import get_current_time
 from functions import is_website_accessible
+from functions import get_temperature_and_humidity
 
 from tools import get_current_date_tool
 from tools import get_current_time_tool
 from tools import is_website_accessible_tool
-
+from tools import get_temperature_and_humidity_tool
 
 from typing import List
 from typing import Dict
@@ -194,9 +195,20 @@ def ask_agent(
     
     client = ollama_client(ollama_base_url)
     
+    host_1 = "192.168.1.47"
+    port_1 = 8888
+    gpio_pin_1 = 4
+    
     # Message système avec instructions détaillées
-    system_message = """
+    system_message = f"""
     Tu es un assistant qui peut répondre à des questions et exécuter des tâches.
+    Tu peux utiliser les outils suivants :
+    - get_current_date
+    - get_current_time
+    - is_website_accessible
+    - get_temperature_and_humidity
+    
+    Dans la chambre le capteur DHT11 est connecté à la broche {gpio_pin_1} d'un Raspberry Pi avec un service remotegpio sur le port {port_1}, il est accessible sur le reseau local via l'adresse IP {host_1}."
     """
 
     # Construire le message utilisateur en fonction des paramètres
@@ -209,14 +221,16 @@ def ask_agent(
     tools_list = [
         get_current_date_tool,
         get_current_time_tool,
-        is_website_accessible_tool
+        is_website_accessible_tool,
+        get_temperature_and_humidity_tool
     ]
     prompt_ = None
 
     available_functions = {
         'get_current_date': get_current_date,
         'get_current_time': get_current_time,
-        'is_website_accessible': is_website_accessible
+        'is_website_accessible': is_website_accessible,
+        'get_temperature_and_humidity': get_temperature_and_humidity
     }
 
     # Configuration des options pour Ollama
