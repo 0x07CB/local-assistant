@@ -151,7 +151,7 @@ En suivant ces étapes, vous pouvez contribuer efficacement au projet et aider �
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ## Auteurs
-Liste des contributeurs principaux et leurs rôles.
+Ce projet a été créé par @0x07cb. Bien que je sois actuellement le seul auteur, je suis ouvert à de futures collaborations et contributions de la communauté.
 
 ## Remerciements
 Remerciements à ceux qui ont aidé au développement du projet.
