@@ -80,7 +80,36 @@ Pour installer et utiliser ce projet de manière optimale, il est recommandé d'
    ```
 
 ## Utilisation
-Exemples et instructions sur la façon d'utiliser le projet après l'installation.
+1. **Lancer l'assistant local** :
+   - Assurez-vous que votre environnement virtuel est activé.
+   - Exécutez la commande suivante pour démarrer l'assistant avec un prompt spécifique :
+     ```bash
+     python local-assistant/main.py --prompt "Quel heure est-il ?"
+     ```
+
+2. **Changer le modèle utilisé** :
+   - Vous pouvez spécifier un modèle différent en utilisant l'option `--model` :
+     ```bash
+     python local-assistant/main.py --prompt "Quel est le temps aujourd'hui ?" --model "llama3.2:3b"
+     ```
+
+3. **Utiliser une URL de serveur Ollama différente** :
+   - Si votre serveur Ollama est hébergé à une URL différente, utilisez l'option `--ollama-base-url` :
+     ```bash
+     python local-assistant/main.py --prompt "Démarre le serveur" --ollama-base-url "http://192.168.1.100:11434"
+     ```
+
+4. **Décharger le modèle après utilisation** :
+   - Pour libérer des ressources, vous pouvez décharger le modèle après son utilisation avec l'option `--unload` :
+     ```bash
+     python local-assistant/main.py --prompt "Arrête le service" --unload
+     ```
+
+5. **Afficher l'aide** :
+   - Pour voir toutes les options disponibles, utilisez l'option `--help` :
+     ```bash
+     python local-assistant/main.py --help
+     ```
 
 ## Contribuer
 Instructions pour ceux qui souhaitent contribuer au projet, y compris les règles de contribution et le processus de pull request.
@@ -93,4 +122,6 @@ Liste des contributeurs principaux et leurs rôles.
 
 ## Remerciements
 Remerciements à ceux qui ont aidé au développement du projet.
+
+Si vous souhaitez soutenir ce projet, vous pouvez [m'offrir un café](https://buymeacoffee.com/0x07cb).
 
