@@ -112,7 +112,40 @@ Pour installer et utiliser ce projet de manière optimale, il est recommandé d'
      ```
 
 ## Contribuer
-Instructions pour ceux qui souhaitent contribuer au projet, y compris les règles de contribution et le processus de pull request.
+
+Nous accueillons avec plaisir les contributions de la communauté ! Voici comment vous pouvez contribuer :
+
+1. **Signaler des bugs** : Si vous trouvez un bug, veuillez ouvrir une issue sur le dépôt GitHub avec des détails sur le problème et comment le reproduire.
+
+2. **Proposer des améliorations** : Si vous avez des idées pour améliorer le projet, n'hésitez pas à ouvrir une issue pour en discuter. Nous sommes toujours ouverts aux nouvelles idées !
+
+3. **Soumettre des pull requests** : 
+   - **Forkez le dépôt** : Créez une copie de ce dépôt sur votre compte GitHub.
+   - **Clonez votre fork** : Clonez votre fork sur votre machine locale.
+     ```bash
+     git clone https://github.com/votre-utilisateur/local-assistant.git
+     ```
+   - **Créez une branche** : Créez une nouvelle branche pour votre fonctionnalité ou correction de bug.
+     ```bash
+     git checkout -b ma-nouvelle-fonctionnalite
+     ```
+   - **Effectuez vos modifications** : Apportez vos modifications et assurez-vous que le code fonctionne correctement.
+   - **Testez vos modifications** : Exécutez les tests pour vous assurer que tout fonctionne comme prévu.
+   - **Commitez vos modifications** : Commitez vos modifications avec un message clair et descriptif.
+     ```bash
+     git commit -m "Ajout d'une nouvelle fonctionnalité"
+     ```
+   - **Poussez votre branche** : Poussez votre branche sur GitHub.
+     ```bash
+     git push origin ma-nouvelle-fonctionnalite
+     ```
+   - **Ouvrez une pull request** : Allez sur le dépôt original et ouvrez une pull request pour que nous puissions examiner vos modifications.
+
+4. **Respectez le code de conduite** : Assurez-vous de respecter notre code de conduite lors de vos interactions avec la communauté.
+
+5. **Documentation** : Aidez à améliorer la documentation en ajoutant des exemples, en clarifiant des sections ou en corrigeant des erreurs.
+
+En suivant ces étapes, vous pouvez contribuer efficacement au projet et aider à son amélioration continue. Si vous avez des questions, n'hésitez pas à nous contacter via les issues sur GitHub.
 
 ## Licence
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
